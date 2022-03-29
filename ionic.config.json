@@ -1,0 +1,7 @@
+{
+  "name": "ValueCalc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
