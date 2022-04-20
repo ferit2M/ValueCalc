@@ -1,0 +1,50 @@
+ion-grid {
+    width: 100%;
+}
+
+.itemBackground {
+    --background: #ece4e4;
+}
+
+.itemInputBorderRadius {
+    --border-radius: 20px;
+}
+
+.itemAlternateCurrencyBackground {
+    --background: #d6d3d3;
+}
+  
+.inputLabel {
+    padding-right: 30px;
+}
+
+.inputBox {
+    background: #c8f5c9;
+}
+  
+.currencyLabel {
+    padding-left: 30px;
+    text-align: right;
+} 
+  
+#labelShares {
+    color: green;
+    font-size: 25px;
+}
+  
+.makeGapAbove {
+    padding-top: 20px;
+}
+
+// Text label colors
+.profitColor {
+    color: #177017;
+}
+
+.neutralColor {
+    color: #888621;
+}
+
+.lossColor {
+    color: #b11f1f;
+}
