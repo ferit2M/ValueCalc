@@ -1,7 +1,24 @@
 ion-button {
-    margin: 25px;
+    //margin: 25px;
+    width: 100%;   
 }
 
-#login {
-    float: right;
+ion-col {
+    margin: 10px;
 }
+
+ion-row {
+    //width: 50em;
+ 
+    max-width: 100%;
+}
+
+ion-grid {
+    background-color: #E8D2AE;
+        
+    
+}
+
+/* #login {
+    float: right;
+} */

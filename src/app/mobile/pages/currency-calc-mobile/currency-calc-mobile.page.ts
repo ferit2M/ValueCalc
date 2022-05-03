@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-currency-calc-mobile',
@@ -26,22 +25,11 @@ export class CurrencyCalcMobilePage implements OnInit {
   eurUsd: number;
 
   constructor(
-    private httpService: HttpService
+    
   ) { }
 
   ngOnInit() {
-    this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/USD").subscribe((response)=>{
-     this.usdHrk = response.conversion_rates.HRK;
-     this.usdEur = response.conversion_rates.EUR;
-   }).unsubscribe;
-   this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/EUR").subscribe((response)=>{
-     this.eurHrk = response.conversion_rates.HRK;
-     this.eurUsd = response.conversion_rates.USD;
-   }).unsubscribe;
-   this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/HRK").subscribe((response)=>{
-     this.hrkEur = response.conversion_rates.EUR;
-     this.hrkUsd = response.conversion_rates.USD;
-   }).unsubscribe;
+    
   }
 
   calculateExchange(){

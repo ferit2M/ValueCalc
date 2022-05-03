@@ -8,6 +8,7 @@ import { CurrencyCalcPageRoutingModule } from './currency-calc-routing.module';
 
 import { CurrencyCalcPage } from './currency-calc.page';
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+import { CurrenciesComponent } from '../../components/currencies/currencies.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
     IonicModule,
     CurrencyCalcPageRoutingModule
   ],
-  declarations: [CurrencyCalcPage, NavBarComponent]
+  declarations: [CurrencyCalcPage, NavBarComponent, CurrenciesComponent]
 })
 export class CurrencyCalcPageModule {}

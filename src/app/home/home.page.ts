@@ -17,9 +17,7 @@ export class HomePage {
   }
   
   isMobile: Boolean;
-
-  fruits: Array<string> = ['Apple', 'Orange', 'Banana'];
-
+  
   goToCurrencyPage() {
     
     if (this.isMobile) 

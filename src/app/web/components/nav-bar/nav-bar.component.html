@@ -1,14 +1,25 @@
-<ion-list>
-  <ion-item>
-    <ion-button (click)="goToHomePage()">
-      HOME
-    </ion-button>
-    <ion-button (click)="goToCurrencyPage()">
-      CURRENCY CALCULATOR
-    </ion-button>
-    <ion-button (click)="goToValueCalcPage()">
-      VALUE PAPER CALCULATOR
-    </ion-button>
-    <ion-button id="login">log in</ion-button>
-  </ion-item>
-</ion-list>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="goToHomePage()">
+        HOME
+      </ion-button>
+    </ion-col>
+    
+    <ion-col>
+      <ion-button (click)="goToCurrencyPage()">
+        CURRENCY CALCULATOR
+      </ion-button>
+    </ion-col>
+
+    <ion-col>
+      <ion-button (click)="goToValueCalcPage()">
+        VALUE PAPER CALCULATOR
+      </ion-button>
+    </ion-col>
+
+    <ion-col>
+      <ion-button>log in</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
