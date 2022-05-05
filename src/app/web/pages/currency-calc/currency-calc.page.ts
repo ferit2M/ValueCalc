@@ -38,7 +38,7 @@ export class CurrencyCalcPage implements OnInit {
      this.hrkUsd = response.conversion_rates.USD;
    }).unsubscribe; */
 
-    this.exchangeRatesService.usdHrk.subscribe(val => {
+    /* this.exchangeRatesService.usdHrk.subscribe(val => {
       this.usdHrk = val;
     });
     this.exchangeRatesService.usdEur.subscribe(val => {
@@ -56,6 +56,7 @@ export class CurrencyCalcPage implements OnInit {
     this.exchangeRatesService.hrkUsd.subscribe(val => {
       this.hrkUsd = val;
     });
+ */
   }
 
   formatter = new Intl.NumberFormat('en-US', {

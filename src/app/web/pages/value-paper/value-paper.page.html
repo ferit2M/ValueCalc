@@ -4,138 +4,159 @@
 
 <ion-content>
   <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <app-currencies (exchanger)="currencyChanged($event)"></app-currencies>
+      </ion-col>
 
-    <ion-row size="auto">
       <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Kupljeno pri cijeni</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="buyingPrice" (change)="calculateProfit()"></ion-input>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel">Kupljeno pri cijeni</ion-label>
-          <ion-label>{{buyingPrice_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row> 
+        <ion-grid>
+          <ion-row class="setContentToRight">
+            <ion-radio-group value="{{convertingCurrencyIndex}}">
+              <ion-item>
+                <ion-item *ngFor="let e of exchangeRates; let i=index" (click)="convertingCurrencyChanged(i)">
+                  <ion-label>{{e.currency}}</ion-label>    
+                  <ion-radio slot="end" value="{{i}}"></ion-radio>
+                </ion-item>
+              </ion-item>
+            </ion-radio-group>
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Kupljeno za iznos</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="spentBuying" (change)="calculateProfit()"></ion-input>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel">Kupljeno za iznos</ion-label>
-          <ion-label>{{spentBuying_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          </ion-row>
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Trenutna cijena</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="currentPrice" (change)="calculateProfit()"></ion-input>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel">Trenutna cijena</ion-label>
-          <ion-label>{{currentPrice_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground itemInputBorderRadius">
+                <ion-label class="inputLabel">Kupljeno pri cijeni</ion-label>
+                <ion-input class="inputBox" type="number" min="0" [(ngModel)]="buyingPrice" (change)="calculateProfit()"></ion-input>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground">
+                <ion-label class="inputLabel">Kupljeno pri cijeni</ion-label>
+                <ion-label>{{buyingPrice_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row> 
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Količina</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="boughtShares" (change)="calculateProfitUsingShares()"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item class="itemAlternateCurrencyBackground">
-          <ion-label>Količina:</ion-label>
-          <ion-label id="labelShares"><b>{{boughtShares}}</b></ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground itemInputBorderRadius">
+                <ion-label class="inputLabel">Kupljeno za iznos</ion-label>
+                <ion-input class="inputBox" type="number" min="0" [(ngModel)]="spentBuying" (change)="calculateProfit()"></ion-input>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground">
+                <ion-label class="inputLabel">Kupljeno za iznos</ion-label>
+                <ion-label>{{spentBuying_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item class="itemBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
-          <ion-label class="inputLabel">Vrijednost vlasništva</ion-label>
-          <ion-label>{{totalWorth}}</ion-label>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
-          <ion-label class="inputLabel">Vrijednost vlasništva</ion-label>
-          <ion-label>{{totalWorth_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground itemInputBorderRadius">
+                <ion-label class="inputLabel">Trenutna cijena</ion-label>
+                <ion-input class="inputBox" type="number" min="0" [(ngModel)]="currentPrice" (change)="calculateProfit()"></ion-input>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="itemAlternateCurrencyBackground">
+                <ion-label class="inputLabel">Trenutna cijena</ion-label>
+                <ion-label>{{currentPrice_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item class="itemBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
-          <ion-label class="inputLabel">Profit</ion-label>
-          <ion-label>{{profit}}</ion-label>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
-          <ion-label class="inputLabel">Profit</ion-label>
-          <ion-label>{{profit_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground itemInputBorderRadius">
+                <ion-label class="inputLabel">Količina</ion-label>
+                <ion-input class="inputBox" type="number" min="0" [(ngModel)]="boughtShares" (change)="calculateProfitUsingShares()"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="itemAlternateCurrencyBackground">
+                <ion-label>Količina:</ion-label>
+                <ion-label id="labelShares"><b>{{boughtShares}}</b></ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-row size="auto" class="makeGapAbove">
-      <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Ciljani profit</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="profitTarget" (change)="calculateTargetProfit()"></ion-input>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel">Ciljani profit</ion-label>
-          <ion-label>{{profitTarget_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row> 
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
+                <ion-label class="inputLabel">Vrijednost vlasništva</ion-label>
+                <ion-label>{{totalWorth}}</ion-label>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
+                <ion-label class="inputLabel">Vrijednost vlasništva</ion-label>
+                <ion-label>{{totalWorth_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-row size="auto">
-      <ion-col>
-        <ion-item  class="itemBackground">
-          <ion-label class="inputLabel">Izlaz</ion-label>
-          <ion-label>{{profitTargetSell}}</ion-label>
-          <ion-label class="currencyLabel">USD</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel">Izlaz</ion-label>
-          <ion-label>{{profitTargetSell_AltCurrency}}</ion-label>
-          <ion-label class="currencyLabel">HRK</ion-label>
-        </ion-item>
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item class="itemBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
+                <ion-label class="inputLabel">Profit</ion-label>
+                <ion-label>{{profit}}</ion-label>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground" [ngClass]="profit >= 0 ? profit > 0 ? 'profitColor' : 'neutralColor' : 'lossColor'">
+                <ion-label class="inputLabel">Profit</ion-label>
+                <ion-label>{{profit_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row size="auto" class="makeGapAbove">
+            <ion-col>
+              <ion-item class="itemBackground itemInputBorderRadius">
+                <ion-label class="inputLabel">Ciljani profit</ion-label>
+                <ion-input class="inputBox" type="number" min="0" [(ngModel)]="profitTarget" (change)="calculateTargetProfit()"></ion-input>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground">
+                <ion-label class="inputLabel">Ciljani profit</ion-label>
+                <ion-label>{{profitTarget_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row> 
+
+          <ion-row size="auto">
+            <ion-col>
+              <ion-item  class="itemBackground">
+                <ion-label class="inputLabel">Izlaz</ion-label>
+                <ion-label>{{profitTargetSell}}</ion-label>
+                <ion-label class="currencyLabel">{{mainCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item  class="itemAlternateCurrencyBackground">
+                <ion-label class="inputLabel">Izlaz</ion-label>
+                <ion-label>{{profitTargetSell_AltCurrency}}</ion-label>
+                <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>

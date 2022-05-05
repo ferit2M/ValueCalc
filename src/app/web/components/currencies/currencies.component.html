@@ -1,10 +1,40 @@
-  <ion-item *ngFor="let c of fromUSD">
-    <p>1 USD = {{c.rate}} {{c.currency}}</p>
+<ion-radio-group value="btn1">
+
+  <ion-item>
+    <h3>1 USD</h3>
+    <ion-radio slot="end" value="btn1" (click)="changeCurrency('USD')"></ion-radio>
   </ion-item>
-  <ion-item *ngFor="let c1 of fromEUR">
-    <p>{{c1.currency}}  {{c1.rate}}</p>
+  <ion-item lines="none" *ngFor="let c of fromUSD" class="ratesLeftMargin">
+    = {{c.rate}} {{c.currency}}
   </ion-item>
-  <ion-item *ngFor="let c of fromHRK">
-    <p>{{c.currency}}  {{c.rate}}</p>
+
+  <ion-item>
+    <h3>1 EUR</h3>
+    <ion-radio slot="end" value="btn2" (click)="changeCurrency('EUR')"></ion-radio>
   </ion-item>
+  <ion-item lines="none" *ngFor="let c of fromEUR" class="ratesLeftMargin">
+    = {{c.rate}} {{c.currency}}
+  </ion-item>
+
+  <ion-item>
+    <h3>1 HRK</h3>
+    <ion-radio slot="end" value="btn3" (click)="changeCurrency('HRK')"></ion-radio>
+  </ion-item>
+  <ion-item lines="none" *ngFor="let c of fromHRK" class="ratesLeftMargin">
+    = {{c.rate}} {{c.currency}}
+  </ion-item>
+
+</ion-radio-group>
+
+<!-- <ion-radio-group>
+  <ion-item-group *ngFor="let currency of currenciesArray; let i=index" value="0">
+    <ion-item>
+      <h3>1 {{currency}}</h3>
+      <ion-radio slot="end" (click)="changeCurrency(currency)" value="{{i}}"></ion-radio>
+    </ion-item>
+    <ion-item lines="none" *ngFor="let c of fromHRK" class="ratesLeftMargin">
+      = {{c.rate}} {{c.currency}}
+    </ion-item>
+  </ion-item-group>
+</ion-radio-group> -->
 

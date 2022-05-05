@@ -8,6 +8,7 @@ import { ValuePaperPageRoutingModule } from './value-paper-routing.module';
 
 import { ValuePaperPage } from './value-paper.page';
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+import { CurrenciesComponent } from '../../components/currencies/currencies.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
     IonicModule,
     ValuePaperPageRoutingModule
   ],
-  declarations: [ValuePaperPage, NavBarComponent]
+  declarations: [ValuePaperPage, NavBarComponent, CurrenciesComponent]
 })
 export class ValuePaperPageModule {}

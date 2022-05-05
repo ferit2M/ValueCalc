@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
 
 @Component({
   selector: 'app-value-paper',
@@ -7,17 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ValuePaperPage implements OnInit {
 
-  constructor() { }
+  constructor(private exchangeRatesService: ExchangeRatesService) { }
+
+  fromUSD: FromCurrency[] = [];
+  fromEUR: FromCurrency[] = []; 
+  fromHRK: FromCurrency[] = []; 
+
+  
+  exchangeRates: FromCurrency[] = [];
+  
+  mainCurrency: string;
+  convertingCurrency: string;
+  convertingCurrencyIndex = 0;
 
   ngOnInit() {
   }
 
-  USD_HRK: number = 6.37;
-  conversionVal: number = 6.37;
+  conversionVal: number = 1;
 
   profit: number = 0;
   totalWorth: number = 0;
-
   
   buyingPrice: number;
   spentBuying: number;
@@ -52,7 +63,7 @@ export class ValuePaperPage implements OnInit {
     this.calculateTargetProfit();
   }
 
-  convertCurrency() {    
+  private convertCurrency() {    
     this.buyingPrice_AltCurrency  = this.buyingPrice * this.conversionVal;
     this.spentBuying_AltCurrency = this.spentBuying * this.conversionVal;
     this.currentPrice_AltCurrency = this.currentPrice * this.conversionVal;
@@ -62,11 +73,28 @@ export class ValuePaperPage implements OnInit {
     this.profitTargetSell_AltCurrency = this.profitTargetSell * this.conversionVal;
   }
 
-  calculateTargetProfit() {
+  private calculateTargetProfit() {
     this.profitTargetSell = this.buyingPrice + (this.profitTarget / this.boughtShares);
     
     this.profitTarget_AltCurrency = this.profitTarget * this.conversionVal;
     this.profitTargetSell_AltCurrency = this.profitTargetSell * this.conversionVal;
   }
 
+  private setExchangeRateForConvertingCurrencySelected() {
+    this.conversionVal = this.exchangeRates[this.convertingCurrencyIndex].rate;
+    this.convertingCurrency = this.exchangeRates[this.convertingCurrencyIndex].currency;
+    this.calculateProfit();
+  }
+
+  currencyChanged(exchanger: { currencyName: string, fromCurrency: FromCurrency[] }) {
+    this.mainCurrency = exchanger.currencyName;
+    this.exchangeRates = exchanger.fromCurrency;
+
+    this.setExchangeRateForConvertingCurrencySelected();
+  }
+
+  convertingCurrencyChanged(index: number) {
+    this.convertingCurrencyIndex = index;
+    this.setExchangeRateForConvertingCurrencySelected();
+  }
 }
