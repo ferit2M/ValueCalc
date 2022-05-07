@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { TabCommunicationService } from '../../services/tab-communication.service';
 
 @Component({
-  selector: 'app-value-paper-mobile',
-  templateUrl: './value-paper-mobile.page.html',
-  styleUrls: ['./value-paper-mobile.page.scss'],
+  selector: 'app-calculator-tab',
+  templateUrl: './calculator-tab.page.html',
+  styleUrls: ['./calculator-tab.page.scss'],
 })
-export class ValuePaperMobilePage implements OnInit {
+export class CalculatorTabPage implements OnInit {
 
-  constructor() { }
+  constructor(private tabComm: TabCommunicationService) { }
 
-  fromUSD: FromCurrency[] = [];
+  /* fromUSD: FromCurrency[] = [];
   fromEUR: FromCurrency[] = []; 
-  fromHRK: FromCurrency[] = []; 
+  fromHRK: FromCurrency[] = [];  */
 
   
   exchangeRates: FromCurrency[] = [];
@@ -22,6 +23,11 @@ export class ValuePaperMobilePage implements OnInit {
   convertingCurrencyIndex = 0;
 
   ngOnInit() {
+    this.tabComm.exchanger.subscribe(val => {
+      console.log(val);
+      if (val != null)
+        this.currencyChanged(val);
+    })
   }
 
   conversionVal: number = 1;

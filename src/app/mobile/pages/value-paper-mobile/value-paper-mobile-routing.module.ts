@@ -6,8 +6,23 @@ import { ValuePaperMobilePage } from './value-paper-mobile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ValuePaperMobilePage
-  }
+      redirectTo: 'currencySwitch',
+      pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: ValuePaperMobilePage,
+    children: [
+      {
+        path: 'currencySwitch',
+        loadChildren: () => import('../currencies-tab/currencies-tab.module').then( m => m.CurrenciesTabPageModule)
+      },
+      {
+        path: 'calculator',
+        loadChildren: () => import('../calculator-tab/calculator-tab.module').then( m => m.CalculatorTabPageModule)
+      },
+    ]
+  },
 ];
 
 @NgModule({

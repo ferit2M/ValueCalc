@@ -13,11 +13,11 @@ ion-grid {
 
 .itemAlternateCurrencyBackground {
     --background: #d6d3d3;
+    width: 100%;
 }
   
 .inputLabel {
     padding-right: 30px;
-    margin-right: 20px;
 }
 
 .inputBox {
@@ -38,7 +38,7 @@ ion-grid {
 } */
   
 .makeGapAbove {
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 // Text label colors
@@ -60,5 +60,5 @@ ion-grid {
 }
 
 .setContentToRight {
-    justify-content: end;
+    justify-content: center;
 }

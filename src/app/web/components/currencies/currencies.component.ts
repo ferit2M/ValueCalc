@@ -22,7 +22,7 @@ export class CurrenciesComponent implements OnInit {
   ngOnInit() {
     this.exchangeRatesService.fromUSD.subscribe(val => {
       this.fromUSD = val;
-      this.setFirstRate("usd", this.fromUSD);
+      this.setFirstRate("USD", this.fromUSD);
     })
 
     this.exchangeRatesService.fromEUR.subscribe(val => {

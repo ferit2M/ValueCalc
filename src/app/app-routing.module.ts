@@ -35,7 +35,15 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },  {
+    path: 'calculator-tab',
+    loadChildren: () => import('./mobile/pages/calculator-tab/calculator-tab.module').then( m => m.CalculatorTabPageModule)
+  },
+  {
+    path: 'currencies-tab',
+    loadChildren: () => import('./mobile/pages/currencies-tab/currencies-tab.module').then( m => m.CurrenciesTabPageModule)
   }
+
 ];
 
 @NgModule({
