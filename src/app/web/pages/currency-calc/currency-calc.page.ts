@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
+import { FromCurrency } from 'src/app/interfaces/from-currency';
 
 @Component({
   selector: 'app-currency-calc',
@@ -8,55 +9,11 @@ import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
 })
 export class CurrencyCalcPage implements OnInit {
 
-  inputValue: string;
-  outputValue: string;
-  inputCurrency: string;
-  outputCurrency: string;
-
-  usdHrk: number;
-  usdEur: number;
-  hrkEur: number;
-  hrkUsd: number;
-  eurHrk: number;
-  eurUsd: number;
-
   constructor(
     private exchangeRatesService: ExchangeRatesService
   ) { }
 
   ngOnInit() {
-    /* this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/USD").subscribe((response)=>{
-     this.usdHrk = response.conversion_rates.HRK;
-     this.usdEur = response.conversion_rates.EUR;
-   }).unsubscribe;
-   this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/EUR").subscribe((response)=>{
-     this.eurHrk = response.conversion_rates.HRK;
-     this.eurUsd = response.conversion_rates.USD;
-   }).unsubscribe;
-   this.httpService.getRequest("https://v6.exchangerate-api.com/v6/5cc6007a44fb302d3d240b3d/latest/HRK").subscribe((response)=>{
-     this.hrkEur = response.conversion_rates.EUR;
-     this.hrkUsd = response.conversion_rates.USD;
-   }).unsubscribe; */
-
-    /* this.exchangeRatesService.usdHrk.subscribe(val => {
-      this.usdHrk = val;
-    });
-    this.exchangeRatesService.usdEur.subscribe(val => {
-      this.usdEur = val;
-    });
-    this.exchangeRatesService.eurHrk.subscribe(val => {
-      this.eurHrk = val;
-    });
-    this.exchangeRatesService.eurUsd.subscribe(val => {
-      this.eurUsd = val;
-    });
-    this.exchangeRatesService.hrkEur.subscribe(val => {
-      this.hrkEur = val;
-    });
-    this.exchangeRatesService.hrkUsd.subscribe(val => {
-      this.hrkUsd = val;
-    });
- */
   }
 
   formatter = new Intl.NumberFormat('en-US', {
@@ -64,37 +21,69 @@ export class CurrencyCalcPage implements OnInit {
     maximumFractionDigits: 4,
  });
 
+ inputValue: string;
+ outputValue: string;
+ inputCurrency: string;
+ outputCurrency: string;
+
+ fromUSD: FromCurrency[] = [];
+ fromEUR: FromCurrency[] = []; 
+ fromHRK: FromCurrency[] = []; 
+
+  exchangeRates: FromCurrency[] = [];
+  
+  convertingCurrencyIndex = 0;
+  conversionVal = 1;
+
+ private setExchangeRateForConvertingCurrencySelected() {
+  this.conversionVal = this.exchangeRates[this.convertingCurrencyIndex].rate;
+  this.outputCurrency = this.exchangeRates[this.convertingCurrencyIndex].currency;
+  this.calculateExchange();
+}
+
+currencyChanged(exchanger: { currencyName: string, fromCurrency: FromCurrency[] }) {
+  this.inputCurrency = exchanger.currencyName;
+  this.exchangeRates = exchanger.fromCurrency;
+
+  this.setExchangeRateForConvertingCurrencySelected();
+}
+
+convertingCurrencyChanged(index: number) {
+  this.convertingCurrencyIndex = index;
+  this.setExchangeRateForConvertingCurrencySelected();
+}
+
   calculateExchange(){
-    if(this.inputCurrency == "hrk"){
-      if(this.outputCurrency == "usd"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.hrkUsd));
+    if(this.inputCurrency == "HRK"){
+      if(this.outputCurrency == "USD"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * this.conversionVal);
       }
-      else if(this.outputCurrency == "eur"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.hrkUsd));
-      }
-      else{
-        this.outputValue = this.inputValue;
-      }
-    }
-
-    else if(this.inputCurrency == "usd"){
-      if(this.outputCurrency == "hrk"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.usdHrk));
-      }
-      else if(this.outputCurrency == "eur"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.usdEur));
+      else if(this.outputCurrency == "EUR"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
         this.outputValue = this.inputValue;
       }
     }
 
-    else if(this.inputCurrency == "eur"){
-      if(this.outputCurrency == "hrk"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.eurHrk));
+    else if(this.inputCurrency == "USD"){
+      if(this.outputCurrency == "HRK"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
-      else if(this.outputCurrency == "usd"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.eurUsd));
+      else if(this.outputCurrency == "EUR"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
+      }
+      else{
+        this.outputValue = this.inputValue;
+      }
+    }
+
+    else if(this.inputCurrency == "EUR"){
+      if(this.outputCurrency == "HRK"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
+      }
+      else if(this.outputCurrency == "USD"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
         this.outputValue = this.inputValue;

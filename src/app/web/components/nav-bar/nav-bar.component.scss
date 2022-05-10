@@ -1,6 +1,7 @@
 ion-button {
-    //margin: 25px;
     width: 100%;   
+    --background: #A2C5AC;
+    color: black;
 }
 
 ion-col {
@@ -8,17 +9,9 @@ ion-col {
 }
 
 ion-row {
-    //width: 50em;
- 
     max-width: 100%;
 }
 
 ion-grid {
-    background-color: #E8D2AE;
-        
-    
+    background-color: #7F6A93;
 }
-
-/* #login {
-    float: right;
-} */

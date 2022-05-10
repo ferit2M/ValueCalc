@@ -2,42 +2,45 @@
   <app-nav-bar></app-nav-bar>
 </ion-header>
 
-<ion-content>
+<ion-content class="currencyPage">
   <ion-grid>
     <ion-row size="auto">
       <ion-col size="auto" class="currenciesCol">
-        <app-currencies></app-currencies>
+        <app-currencies (exchanger)="currencyChanged($event)"></app-currencies> 
       </ion-col>
+
       <ion-col>
-        <ion-item class="itemBackground itemInputBorderRadius">
-          <ion-label class="inputLabel">Unesi iznos</ion-label>
-          <ion-input class="inputBox" type="number" min="0" [(ngModel)]="inputValue" (change)="calculateExchange()"></ion-input>
-              <ion-list>
-                <ion-item>
-                  <ion-select placeholder="Valuta" [(ngModel)]="inputCurrency" (ngModelChange)="calculateExchange()">
-                    <ion-select-option value="usd">USD</ion-select-option>
-                    <ion-select-option value="eur">EUR</ion-select-option>
-                    <ion-select-option value="hrk">HRK</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item  class="itemAlternateCurrencyBackground">
-          <ion-label class="inputLabel" >Vrijednost iznosa</ion-label>
-          <ion-label>{{outputValue}}</ion-label>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="Valuta" [(ngModel)]="outputCurrency" (ngModelChange)="calculateExchange()">
-                <ion-select-option value="usd">USD</ion-select-option>
-                <ion-select-option value="eur">EUR</ion-select-option>
-                <ion-select-option value="hrk">HRK</ion-select-option>
-              </ion-select>
+      <ion-row class="setContentToRight">
+        <ion-radio-group value="{{convertingCurrencyIndex}}">
+          <ion-item>
+            <ion-item *ngFor="let e of exchangeRates; let i=index" (click)="convertingCurrencyChanged(i)">
+              <ion-label>{{e.currency}}</ion-label>    
+              <ion-radio slot="end" value="{{i}}"></ion-radio>
             </ion-item>
-          </ion-list>
-        </ion-item>
-      </ion-col>
-    </ion-row> 
+          </ion-item>
+        </ion-radio-group>
+
+      </ion-row>
+
+      <ion-row>
+      
+        <ion-col>
+          <ion-item class="itemBackground itemInputBorderRadius">
+            <ion-label class="inputLabel">Unesi iznos:</ion-label>
+            <ion-input class="inputBox" type="number" min="0" [(ngModel)]="inputValue" (change)="calculateExchange()"></ion-input>
+            <ion-label>{{inputCurrency}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item  class="itemAlternateCurrencyBackground">
+            <ion-label class="inputLabel" >Vrijednost iznosa:</ion-label>
+            <ion-label>{{outputValue}}</ion-label>
+            <ion-label>{{outputCurrency}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row> 
+    </ion-col>  
+    </ion-row>
+    
   </ion-grid>
 </ion-content>
