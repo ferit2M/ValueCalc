@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
+  
+
   constructor(private router: Router) { }
 
   ngOnInit() {}
@@ -17,11 +19,11 @@ export class NavBarComponent implements OnInit {
   }
 
   goToCurrencyPage() {
-      this.router.navigate(["mobile/currency-calc-mobile"], {replaceUrl: false});
+      this.router.navigate(["mobile/currency-calc-mobile"], {replaceUrl: true});
   }
 
   goToValueCalcPage() {
-      this.router.navigate(["mobile/value-paper-mobile"], {replaceUrl: false});  
+      this.router.navigate(["mobile/value-paper-mobile"], {replaceUrl: true});  
   }
 
   loginClick() {

@@ -14,7 +14,7 @@
         <ion-radio-group value="{{convertingCurrencyIndex}}">
           <ion-item>
             <ion-item *ngFor="let e of exchangeRates; let i=index" (click)="convertingCurrencyChanged(i)">
-              <ion-label>{{e.currency}}</ion-label>    
+              <ion-label style="text-transform:uppercase">{{e.currency}}</ion-label>    
               <ion-radio slot="end" value="{{i}}"></ion-radio>
             </ion-item>
           </ion-item>
@@ -35,7 +35,7 @@
           <ion-item  class="itemAlternateCurrencyBackground">
             <ion-label class="inputLabel" >Vrijednost iznosa:</ion-label>
             <ion-label>{{outputValue}}</ion-label>
-            <ion-label>{{outputCurrency}}</ion-label>
+            <ion-label style="text-transform:uppercase">{{outputCurrency}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row> 

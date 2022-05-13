@@ -55,10 +55,10 @@ convertingCurrencyChanged(index: number) {
 
   calculateExchange(){
     if(this.inputCurrency == "HRK"){
-      if(this.outputCurrency == "USD"){
+      if(this.outputCurrency.toUpperCase() == "USD"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * this.conversionVal);
       }
-      else if(this.outputCurrency == "EUR"){
+      else if(this.outputCurrency.toUpperCase() == "EUR"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
@@ -67,10 +67,10 @@ convertingCurrencyChanged(index: number) {
     }
 
     else if(this.inputCurrency == "USD"){
-      if(this.outputCurrency == "HRK"){
+      if(this.outputCurrency.toUpperCase() == "HRK"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
-      else if(this.outputCurrency == "EUR"){
+      else if(this.outputCurrency.toUpperCase() == "EUR"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
@@ -79,10 +79,10 @@ convertingCurrencyChanged(index: number) {
     }
 
     else if(this.inputCurrency == "EUR"){
-      if(this.outputCurrency == "HRK"){
+      if(this.outputCurrency.toUpperCase() == "HRK"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
-      else if(this.outputCurrency == "USD"){
+      else if(this.outputCurrency.toUpperCase() == "USD"){
         this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{

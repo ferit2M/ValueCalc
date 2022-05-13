@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
 
 @Component({
   selector: 'app-currency-calc-mobile',
@@ -7,62 +9,81 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrencyCalcMobilePage implements OnInit {
 
+  constructor(
+    private exchangeRatesService: ExchangeRatesService
+  ) { }
+
+  ngOnInit() {
+  }
+
   formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 4,      
     maximumFractionDigits: 4,
  });
 
-  inputValue: string;
-  outputValue: string;
-  inputCurrency: string;
-  outputCurrency: string;
+ inputValue: string;
+ outputValue: string;
+ inputCurrency: string;
+ outputCurrency: string;
 
-  usdHrk: number;
-  usdEur: number;
-  hrkEur: number;
-  hrkUsd: number;
-  eurHrk: number;
-  eurUsd: number;
+ fromUSD: FromCurrency[] = [];
+ fromEUR: FromCurrency[] = []; 
+ fromHRK: FromCurrency[] = []; 
 
-  constructor(
-    
-  ) { }
+  exchangeRates: FromCurrency[] = [];
+  
+  convertingCurrencyIndex = 0;
+  conversionVal = 1;
 
-  ngOnInit() {
-    
-  }
+ private setExchangeRateForConvertingCurrencySelected() {
+  this.conversionVal = this.exchangeRates[this.convertingCurrencyIndex].rate;
+  this.outputCurrency = this.exchangeRates[this.convertingCurrencyIndex].currency;
+  this.calculateExchange();
+}
+
+currencyChanged(exchanger: { currencyName: string, fromCurrency: FromCurrency[] }) {
+  this.inputCurrency = exchanger.currencyName;
+  this.exchangeRates = exchanger.fromCurrency;
+
+  this.setExchangeRateForConvertingCurrencySelected();
+}
+
+convertingCurrencyChanged(index: number) {
+  this.convertingCurrencyIndex = index;
+  this.setExchangeRateForConvertingCurrencySelected();
+}
 
   calculateExchange(){
-    if(this.inputCurrency == "hrk"){
-      if(this.outputCurrency == "usd"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.hrkUsd));
+    if(this.inputCurrency == "HRK"){
+      if(this.outputCurrency.toUpperCase() == "USD"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * this.conversionVal);
       }
-      else if(this.outputCurrency == "eur"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.hrkUsd));
-      }
-      else{
-        this.outputValue = this.inputValue;
-      }
-    }
-
-    else if(this.inputCurrency == "usd"){
-      if(this.outputCurrency == "hrk"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.usdHrk));
-      }
-      else if(this.outputCurrency == "eur"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.usdEur));
+      else if(this.outputCurrency.toUpperCase() == "EUR"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
         this.outputValue = this.inputValue;
       }
     }
 
-    else if(this.inputCurrency == "eur"){
-      if(this.outputCurrency == "hrk"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.eurHrk));
+    else if(this.inputCurrency == "USD"){
+      if(this.outputCurrency.toUpperCase() == "HRK"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
-      else if(this.outputCurrency == "usd"){
-        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.eurUsd));
+      else if(this.outputCurrency.toUpperCase() == "EUR"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
+      }
+      else{
+        this.outputValue = this.inputValue;
+      }
+    }
+
+    else if(this.inputCurrency == "EUR"){
+      if(this.outputCurrency.toUpperCase() == "HRK"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
+      }
+      else if(this.outputCurrency.toUpperCase() == "USD"){
+        this.outputValue = this.formatter.format(Number(this.inputValue) * Number(this.conversionVal));
       }
       else{
         this.outputValue = this.inputValue;
