@@ -1,0 +1,10 @@
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\bin\Debug\ValueCalcDatabase.dacpac
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\bin\Debug\ValueCalcDatabase.dll
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\bin\Debug\ValueCalcDatabase.pdb
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\ValueCalcDatabase.sqlproj.AssemblyReference.cache
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\Model.xml
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\refactor.xml
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\postdeploy.sql
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\predeploy.sql
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\ValueCalcDatabase.dll
+D:\Ionic repos\ValueCalc\ValueCalcWebApp\ValueCalcDatabase\obj\Debug\ValueCalcDatabase.pdb
