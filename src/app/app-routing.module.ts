@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ChildrenOutletContexts, PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path: 'value-paper',
         loadChildren: () => import('./web/pages/value-paper/value-paper.module').then( m => m.ValuePaperPageModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./web/pages/login/login.module').then( m => m.LoginPageModule)
       },
     ]
   },
@@ -27,6 +31,10 @@ const routes: Routes = [
         loadChildren: () => import('./mobile/pages/value-paper-mobile/value-paper-mobile.module').then( m => m.ValuePaperMobilePageModule)
       },
       {
+        path: 'login',
+        loadChildren: () => import('./mobile/pages/login/login.module').then( m => m.LoginPageModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then(m => m.HomeMobilePageModule)
       }
@@ -35,15 +43,15 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },  {
+  },/*
+  {
     path: 'calculator-tab',
     loadChildren: () => import('./mobile/pages/calculator-tab/calculator-tab.module').then( m => m.CalculatorTabPageModule)
   },
   {
     path: 'currencies-tab',
     loadChildren: () => import('./mobile/pages/currencies-tab/currencies-tab.module').then( m => m.CurrenciesTabPageModule)
-  }
-
+  },*/
 ];
 
 @NgModule({

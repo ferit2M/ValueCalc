@@ -26,8 +26,7 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(["mobile/value-paper-mobile"], {replaceUrl: true});  
   }
 
-  loginClick() {
-    
+  goToLoginPage() {
+    this.router.navigate(["mobile/login"], {replaceUrl: true});
   }
-
 }

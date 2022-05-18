@@ -39,7 +39,10 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(["web/value-paper"], {replaceUrl: false});   
   }
 
-  loginClick() {
-    
+  goToLoginPage() {
+    if (this.isMobile) 
+      this.router.navigate(["mobile/login"], {replaceUrl: true});
+    else
+      this.router.navigate(["web/login"], {replaceUrl: false});
   }
 }

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ValueCalcWebApp.Data;
 using ValueCalcWebApp.Models;
 
 namespace ValueCalcWebApp.Controllers
@@ -12,22 +14,122 @@ namespace ValueCalcWebApp.Controllers
   [ApiController]
   public class UsersController : ControllerBase
   {
-    [HttpGet("GetUser")]
-    public IActionResult Get()
+    private ValueCalcDbContext _dbContext;
+
+    public UsersController(ValueCalcDbContext dbContext)
     {
-      //var users = GetUsers();
-      return Ok(); // (users)
+      _dbContext = dbContext;
     }
 
-    [HttpGet("CreateUser")]
+    [HttpGet("GetUsers")]
+    public IActionResult Get()
+    {
+      try
+      {
+        var users = _dbContext.Users.ToList();
+        if (users.Count == 0)
+        {
+          return StatusCode(404, "No user found");
+        }
+        return Ok(users);
+      }
+      catch (Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
+    }
+
+    [HttpPost("CreateUser")]
     public IActionResult Create([FromBody] UserRequest request)
     {
+      Users user = new Users();
+      user.username = request.username;
+      user.firstName = request.firstName;
+      user.lastName = request.lastName;
+      user.password = request.password;
+
+      try
+      {
+        _dbContext.Users.Add(user);
+        _dbContext.SaveChanges();
+      }
+      catch(Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
       return Ok();
     }
 
     [HttpPut("UpdateUser")]
     public IActionResult Update([FromBody] UserRequest request)
     {
+      try
+      {
+        var user = _dbContext.Users.FirstOrDefault(x => x.Id == request.Id);
+        if (user == null)
+        {
+          return StatusCode(404, "User not found");
+        }
+        user.username = request.username;
+        user.firstName = request.firstName;
+        user.lastName = request.lastName;
+        user.password = request.password;
+
+        _dbContext.Entry(user).State = EntityState.Modified;
+        _dbContext.SaveChanges();
+      }
+      catch(Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
+      var users = _dbContext.Users.ToList();
+      return Ok(users);
+    }
+
+    [HttpPut("UpdateLastName")]
+    public IActionResult UpdateLastName([FromBody] UserRequest request)
+    {
+      try
+      {
+        var user = _dbContext.Users.FirstOrDefault(x => x.Id == request.Id);
+        if (user == null)
+        {
+          return StatusCode(404, "User not found");
+        }
+
+        user.lastName = request.lastName;
+
+        _dbContext.Entry(user).State = EntityState.Modified;
+        _dbContext.SaveChanges();
+      }
+      catch (Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
+      var users = _dbContext.Users.ToList();
+      return Ok(users);
+    }
+
+    [HttpPut("UpdatePassword")]
+    public IActionResult UpdatePassword([FromBody] UserRequest request)
+    {
+      try
+      {
+        var user = _dbContext.Users.FirstOrDefault(x => x.Id == request.Id);
+        if (user == null)
+        {
+          return StatusCode(404, "User not found");
+        }
+
+        user.password = request.password;
+
+        _dbContext.Entry(user).State = EntityState.Modified;
+        _dbContext.SaveChanges();
+      }
+      catch (Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
       return Ok();
     }
 
@@ -36,13 +138,5 @@ namespace ValueCalcWebApp.Controllers
     {
       return Ok();
     }
-
-    /*private List<UserRequest> GetUsers()
-    {
-      return new List<UserRequest> {
-        new UserRequest { username = "ABC", firstName = "M", lastName = "T"},
-        new UserRequest { username = "ABC", firstName = "A", lastName = "B"}
-      };
-    }*/
   }
 }
