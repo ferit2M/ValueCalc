@@ -2,11 +2,20 @@
 
   <ion-icon [ngClass]="{'active': !loggedIn}" name="wifi-outline"></ion-icon>
 
-  <div class="center">
+  <div class="center" [hidden]="registerDivVisible">
     <ion-input placeholder="Enter username" type="text" [(ngModel)]="username" class="separate userInput"></ion-input>
     <ion-input placeholder="Input password" type="password" [(ngModel)]="password" class="separate userInput"></ion-input>
     <ion-button color="primary" (click)=logInClick()>Log in</ion-button>
-    <a [routerLink]="['/detail']" (click)="showRegistration = !showRegistration" class="center">Registracija</a>
+    <ion-button color="secondary" (click)=div1Function()>Click if you want to register</ion-button>
+  </div> 
+
+  <div id="registration" class="center" [hidden]="!registerDivVisible">
+    <ion-input placeholder="Enter username" type="text" [(ngModel)]="username" class="separate userInput"></ion-input>
+    <ion-input placeholder="Input password" type="password" [(ngModel)]="password" class="separate userInput"></ion-input>
+    <ion-input placeholder="Enter first name" type="fName" [(ngModel)]="fName" class="separate userInput"></ion-input>
+    <ion-input placeholder="Enter last name" type="lName" [(ngModel)]="lName" class="separate userInput"></ion-input>
+    <ion-button color="primary" (click)=RegisterClick()>Register</ion-button>
+    <ion-button color="secondary" (click)=div1Function()>Click if you want to log in</ion-button>
   </div> 
 
   <!-- <app-registration [hidden]="!showRegistration"></app-registration> -->
