@@ -28,8 +28,10 @@ namespace ValueCalcWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCors();
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
+            services.AddControllers();
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ValueCalcDbContext>(options => options.UseSqlServer(connectionString));
         }
@@ -41,6 +43,8 @@ namespace ValueCalcWebApp
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
+            app.UseMvc();            
 
             app.UseHttpsRedirection();
 
