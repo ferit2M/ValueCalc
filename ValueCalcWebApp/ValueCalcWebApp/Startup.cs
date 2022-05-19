@@ -43,8 +43,9 @@ namespace ValueCalcWebApp
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
-            app.UseMvc();            
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseMvc();
+
 
             app.UseHttpsRedirection();
 

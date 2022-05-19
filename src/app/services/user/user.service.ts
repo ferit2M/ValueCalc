@@ -14,12 +14,7 @@ export class UserService {
   
 
   registerUser(user: User){ 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
-    this.http.post("https://localhost:44303/api/users/createuser", user, httpOptions /* {
+    this.http.post("https://localhost:44303/api/users/createuser", user /* {
       
         "id": 0,
         "username": ,
