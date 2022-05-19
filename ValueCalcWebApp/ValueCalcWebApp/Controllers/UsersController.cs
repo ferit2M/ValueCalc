@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ValueCalcWebApp.Data;
 using ValueCalcWebApp.Models;
@@ -32,6 +34,35 @@ namespace ValueCalcWebApp.Controllers
           return StatusCode(404, "No user found");
         }
         return Ok(users);
+      }
+      catch (Exception)
+      {
+        return StatusCode(500, "An error has occurred");
+      }
+    }
+
+    [HttpGet("VerifyUser")]
+    public IActionResult VerifyUser([FromBody] UserRequest request)
+    {
+      try
+      {
+        var username = request.username;
+        username.TrimStart('"');
+
+        var user = _dbContext.Users.FirstOrDefault(x => x.username == username);
+
+        if (user == null)
+        {
+          return StatusCode(404, "No user found");
+        }
+        else if (user.password == request.password)
+        {
+          return Ok("verified");
+        }
+        else
+        {
+          return StatusCode(403, "Wrong password");
+        }
       }
       catch (Exception)
       {

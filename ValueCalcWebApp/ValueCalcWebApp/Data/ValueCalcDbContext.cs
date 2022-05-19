@@ -13,7 +13,6 @@ namespace ValueCalcWebApp.Data
 
     }
 
-    public DbSet<tblUser> tblUsers { get; set; }
     public DbSet<Users> Users { get; set; }
 
   }
