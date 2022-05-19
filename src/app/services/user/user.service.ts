@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 
@@ -11,8 +11,15 @@ export class UserService {
 
   loggedIn: boolean = false;
 
-  registerUser(user: User){
-    this.http.post("https://localhost:44303/api/users/createuser", user /* {
+  
+
+  registerUser(user: User){ 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    this.http.post("https://localhost:44303/api/users/createuser", user, httpOptions /* {
       
         "id": 0,
         "username": ,
