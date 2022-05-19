@@ -30,8 +30,15 @@ export class LoginComponent implements OnInit {
   
 
   logInClick() {
-    console.log("username: ", this.username);
-    console.log("password: ", this.password);
+    const user: User = {
+      Id: 0,
+      username: this.username,
+      firstName: "",
+      lastName: "",
+      password: this.password
+    }
+
+    this.service.login(user);
 
     //this.service.login(this.username, this.password);
   }

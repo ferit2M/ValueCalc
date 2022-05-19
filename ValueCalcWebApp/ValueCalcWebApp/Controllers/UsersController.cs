@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace ValueCalcWebApp.Controllers
       }
     }
 
-    [HttpGet("VerifyUser")]
+    [HttpPost("VerifyUser")]
     public IActionResult VerifyUser([FromBody] UserRequest request)
     {
       try
@@ -57,7 +58,9 @@ namespace ValueCalcWebApp.Controllers
         }
         else if (user.password == request.password)
         {
-          return Ok("verified");
+          var obj = new { message = "verified" };
+          return StatusCode(200, obj);
+          //return Ok(JObject.Parse("verified"));
         }
         else
         {
