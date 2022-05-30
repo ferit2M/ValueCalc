@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlatformSetService } from 'src/app/services/platform-set.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,14 +12,20 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private platformSet: PlatformSetService
+    private platformSet: PlatformSetService,
+    private service: UserService
   ) { 
     this.isMobile = this.platformSet.isMobile;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.loggedIn.subscribe(state => {
+      this.loginVisible = state;
+  });
+}
   
   isMobile: Boolean;
+  loginVisible: Boolean = false;
 
   goToHomePage() {
     this.router.navigate(["home"], {replaceUrl: false});
@@ -44,5 +51,10 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(["mobile/login"], {replaceUrl: true});
     else
       this.router.navigate(["web/login"], {replaceUrl: false});
+  }
+
+  logout(){
+    this.service.logout();
+    this.router.navigate(["web/login"]);
   }
 }

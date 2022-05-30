@@ -64,6 +64,7 @@ namespace ValueCalcWebApp.Controllers
         }
         else
         {
+
           return StatusCode(403, "Wrong password");
         }
       }

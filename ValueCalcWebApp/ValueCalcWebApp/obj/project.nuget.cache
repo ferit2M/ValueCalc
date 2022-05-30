@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qyBmmPL7AMbgFJHeVT+5Bj3luROt6Z072QGZS+UzAsacz7jlRBZdQUCawxmFdH8zlKxG3gWjQr1OCAJAZvLtJQ==",
+  "dgSpecHash": "oAl3DwL55sbjpAxf+bQLr13+LdmC14JrdBpSZIlYgtGeqwPrLHduDIFLUj9TzNHES+KQTkaXxK2PgzX43SCurA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mihael\\Desktop\\Fakultet\\Hobbyt\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
+  "projectFilePath": "D:\\Fakultet\\Fakultet\\Projekti\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mihael\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\Mihael\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

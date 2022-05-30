@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlatformSetService } from '../services/platform-set.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,20 @@ export class HomePage {
 
   constructor(
     private router: Router,
-    private platformSet: PlatformSetService
+    private platformSet: PlatformSetService,
+    private service: UserService
   ) {
     this.isMobile = this.platformSet.isMobile;
   }
   
+  ngOnInit() {
+    this.service.loggedIn.subscribe(state => {
+      this.userLogin = state;
+  });
+}
   isMobile: Boolean;
+  userLogin:Boolean;
+  userName: String = "";
   
   goToCurrencyPage() {
     

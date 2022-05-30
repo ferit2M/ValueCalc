@@ -5934,11 +5934,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mihael\\Desktop\\Fakultet\\Hobbyt\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
+      "projectUniqueName": "D:\\Fakultet\\Fakultet\\Projekti\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
       "projectName": "ValueCalcWebApp",
-      "projectPath": "C:\\Users\\Mihael\\Desktop\\Fakultet\\Hobbyt\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
+      "projectPath": "D:\\Fakultet\\Fakultet\\Projekti\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\ValueCalcWebApp.csproj",
       "packagesPath": "C:\\Users\\Mihael\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mihael\\Desktop\\Fakultet\\Hobbyt\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\obj\\",
+      "outputPath": "D:\\Fakultet\\Fakultet\\Projekti\\IONIC\\ValueCalc2\\ValueCalc\\ValueCalcWebApp\\ValueCalcWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mihael\\AppData\\Roaming\\NuGet\\NuGet.Config",
