@@ -8,6 +8,13 @@ namespace ValueCalcWebApp.Data
 {
   public class ValuePapers
   {
-    //[Key]
+    [Key]
+    public int Id { get; set; }
+    public string buyingPrice { get; set; }
+    public string spentBuying { get; set; }
+    public string currentPrice { get; set; }
+    public string boughtShares { get; set; }
+
+    public string pname { get; set; }
   }
 }

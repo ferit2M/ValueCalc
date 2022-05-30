@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userLoggedIn: Boolean = false;
+  logMessage: Boolean = false;
+  registerMessage: Boolean = false;
 
   constructor(private service: UserService, private router: Router) { }
 
@@ -44,7 +46,10 @@ export class LoginComponent implements OnInit {
 
     this.service.login(user);
       //checkLogin();
-      
+    if(this.userLoggedIn == false){
+      this.registerMessage = false;
+      this.logMessage = true; 
+    }
 
     //console.log(this.userLoggedIn)
   }
@@ -59,10 +64,13 @@ export class LoginComponent implements OnInit {
     }
 
     this.service.registerUser(user);
-    
+    if(this.userLoggedIn == false){
+      this.logMessage = false;
+      this.registerMessage = true; 
+    }
   }
 
-  div1Function() {
+  showHideRegister() {
     this.registerDivVisible = !this.registerDivVisible;
   }
 
