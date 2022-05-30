@@ -14,6 +14,7 @@ namespace ValueCalcWebApp.Data
     }
 
     public DbSet<Users> Users { get; set; }
-
+    public DbSet<ValuePapers> ValuePapers { get; set; }
+    public DbSet<BoughtPapers> BoughtPapers { get; set; }
   }
 }
