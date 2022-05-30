@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
 import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-currency-calc',
@@ -10,10 +11,12 @@ import { FromCurrency } from 'src/app/interfaces/from-currency';
 export class CurrencyCalcPage implements OnInit {
 
   constructor(
-    private exchangeRatesService: ExchangeRatesService
+    private exchangeRatesService: ExchangeRatesService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.userService.loggedIn.subscribe;
   }
 
   formatter = new Intl.NumberFormat('en-US', {
@@ -26,9 +29,9 @@ export class CurrencyCalcPage implements OnInit {
  inputCurrency: string;
  outputCurrency: string;
 
- fromUSD: FromCurrency[] = [];
- fromEUR: FromCurrency[] = []; 
- fromHRK: FromCurrency[] = []; 
+//  fromUSD: FromCurrency[] = [];
+//  fromEUR: FromCurrency[] = []; 
+//  fromHRK: FromCurrency[] = []; 
 
   exchangeRates: FromCurrency[] = [];
   

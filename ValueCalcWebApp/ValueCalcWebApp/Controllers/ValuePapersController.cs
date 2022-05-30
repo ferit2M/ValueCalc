@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
+=======
+using Newtonsoft.Json.Linq;
+>>>>>>> 5ab203378c815aedc986eee10167c5804e6d6a2d
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +21,6 @@ namespace ValueCalcWebApp.Controllers
   public class ValuePapersController : ControllerBase
   {
     private ValueCalcDbContext _dbContext;
-
     public ValuePapersController(ValueCalcDbContext dbContext)
     {
       _dbContext = dbContext;

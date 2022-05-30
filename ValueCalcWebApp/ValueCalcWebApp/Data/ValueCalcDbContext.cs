@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ValueCalcWebApp.Data
 {
-  public class ValueCalcDbContext: DbContext
+  public class ValueCalcDbContext : DbContext
   {
     public ValueCalcDbContext(DbContextOptions<ValueCalcDbContext> options) : base(options)
     {
