@@ -58,9 +58,9 @@ namespace ValueCalcWebApp.Controllers
         }
         else if (user.password == request.password)
         {
-          var obj = new { message = "verified" };
-          return StatusCode(200, obj);
-          //return Ok(JObject.Parse("verified"));
+          //var obj = new { message = "verified" };
+          //return StatusCode(200, obj);
+          return Ok(user);
         }
         else
         {
@@ -92,7 +92,7 @@ namespace ValueCalcWebApp.Controllers
       {
         return StatusCode(500, "An error has occurred");
       }
-      return Ok();
+      return Ok(user);
     }
 
     [HttpPut("UpdateUser")]

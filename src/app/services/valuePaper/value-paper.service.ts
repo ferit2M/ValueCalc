@@ -15,12 +15,14 @@ export class ValuePaperService {
   papers: BehaviorSubject<Array<ValuePaper>> = new BehaviorSubject<Array<ValuePaper>>([]);
 
   getPapersForUser(user: User) {
-    this.http.post("https://localhost:44303/api/valuepapers/GetPapersForUser", user).toPromise().then((arr: Array<ValuePaper>) => {
-      console.log(arr);
-      this.papers.next(arr);
+    this.http.post("https://localhost:44303/api/valuepapers/GetPapersForUser", user).subscribe((res: ValuePaper[]) => {
+      if (res.length > 0) {
+        this.papers.next(res);
+      }
     },
     (error) => { //Error callback
-      console.error('Login error ' + error.status);
+      console.error(error.status);
+      this.papers.next([]);
     });
   }
 
@@ -30,25 +32,37 @@ export class ValuePaperService {
       this.savePaperWithUser({ userId: userId, paperId: res.id });
     },
     (error) => { //Error callback
-      console.error('Login error ' + error.status);
+      console.error('saveValuePaper error ' + error.status);
     });
   }
 
   private savePaperWithUser(boughtPaper: BoughtPaper) {
     this.http.post("https://localhost:44303/api/valuepapers/SavePaperWithUser", boughtPaper).toPromise().then((res: Response) => {
       console.log("Bought paper saved");
+      this.papers.next([]);
+      this.getPapersForUser({
+        id: boughtPaper.userId,
+        username: "",
+        firstName: "",
+        lastName: "",
+        password: ""
+      });
     },
     (error) => { //Error callback
-      console.error('Login error ' + error.status);
+      console.error('savePaperWithUser error ' + error.status);
     });
   }
 
-  deletePaper() {
-    this.http.post("https://localhost:44303/api/valuepapers/SavePaperWithUser", {}).toPromise().then((res: Response) => {
-      console.log(res); // should return: Record has successfully Deleted
+  deletePaper(paper: ValuePaper, index: number) {
+    this.http.post("https://localhost:44303/api/valuepapers/DeletePaper", paper).toPromise().then((res: Response) => {
+      console.log(res);
+
+      let arr: ValuePaper[] = this.papers.getValue();
+      arr.splice(index, 1);
+      this.papers.next(arr);
     },
     (error) => { //Error callback
-      console.error('Login error ' + error.status);
+      console.error(error.status);
     });
   }
 }

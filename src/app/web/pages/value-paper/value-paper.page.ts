@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { ValuePaper } from 'src/app/interfaces/value-paper';
 import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { ValuePaperService } from 'src/app/services/valuePaper/value-paper.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-value-paper',
@@ -9,20 +13,45 @@ import { ExchangeRatesService } from 'src/app/services/exchange-rates.service';
 })
 export class ValuePaperPage implements OnInit {
 
-  constructor(private exchangeRatesService: ExchangeRatesService) { }
+  constructor(private exchangeRatesService: ExchangeRatesService, private valuePaperService: ValuePaperService, private userService: UserService) { }
+
+  loggedIn: Boolean;
+  papers: ValuePaper[];
 
   fromUSD: FromCurrency[] = [];
   fromEUR: FromCurrency[] = []; 
   fromHRK: FromCurrency[] = []; 
 
-  
   exchangeRates: FromCurrency[] = [];
   
   mainCurrency: string;
   convertingCurrency: string;
   convertingCurrencyIndex = 0;
 
+  private getLoggedUserPapers() {
+    const userId: number = this.userService.getLoggedUserId();
+    if (userId != 0) {
+      const user: User = {
+        id: userId,
+        username: "",
+        firstName: "",
+        lastName: "",
+        password: ""
+      };
+      this.valuePaperService.getPapersForUser(user);
+    }
+  }
+
   ngOnInit() {
+    this.valuePaperService.papers.subscribe(val => {
+      this.papers = val;
+      console.log(this.papers);
+    });
+
+    this.userService.loggedIn.subscribe(val => {
+      this.loggedIn = val;
+    });
+    this.getLoggedUserPapers();
   }
 
   conversionVal: number = 1;
@@ -96,5 +125,27 @@ export class ValuePaperPage implements OnInit {
   convertingCurrencyChanged(index: number) {
     this.convertingCurrencyIndex = index;
     this.setExchangeRateForConvertingCurrencySelected();
+  }
+
+  deletePaperNote(index: number) {
+    console.log("index: ", index);
+    console.log("this.papers[index]: ", this.papers[index]);
+
+    this.valuePaperService.deletePaper(this.papers[index], index);
+
+    //this.getLoggedUserPapers();
+  }
+
+  saveNote() {
+    const paper: ValuePaper = {
+      id: 0,
+      buyingPrice: this.buyingPrice,
+      spentBuying: this.spentBuying,
+      currentPrice: this.currentPrice,
+      boughtShares: this.boughtShares,
+      name: "ime"
+    }
+
+    this.valuePaperService.saveValuePaper(paper, this.userService.getLoggedUserId());
   }
 }

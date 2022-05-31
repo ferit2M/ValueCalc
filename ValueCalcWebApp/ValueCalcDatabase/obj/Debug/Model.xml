@@ -63,12 +63,247 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="3" />
 		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ValuePapers].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ValuePapers]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
+		</Element>
+		<Element Type="SqlUniqueConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Users].[username]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[BoughtPapers]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[BoughtPapers].[userId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[BoughtPapers].[paperId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Papers]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[BoughtPapers].[paperId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[BoughtPapers]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ValuePapers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="8" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Users]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[BoughtPapers].[userId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[BoughtPapers]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Users].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="7" />
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[GetPapersForUser]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [dbo].[ValuePapers].id, [dbo].[ValuePapers].boughtShares, [dbo].[ValuePapers].spentBuying, [dbo].[ValuePapers].currentPrice, [dbo].[ValuePapers].boughtShares,
+		[dbo].[ValuePapers].name
+  from [dbo].[ValuePapers],[dbo].[BoughtPapers] 
+  where [dbo].[BoughtPapers].userId = @ID and [dbo].[ValuePapers].Id = [dbo].[BoughtPapers].paperId
+RETURN 0]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ValuePapers]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[BoughtPapers]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[boughtShares]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[spentBuying]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[currentPrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[BoughtPapers].[userId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[GetPapersForUser].[@ID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ValuePapers].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[BoughtPapers].[paperId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[GetPapersForUser].[@ID]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[0]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="416" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[GetPapersForUser]&#xD;&#xA;&#x9;@ID int = 0&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_BoughtPapers]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[BoughtPapers].[userId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[BoughtPapers].[paperId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[BoughtPapers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="6" />
+		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Users]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[Users].[Id]">
 						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -91,12 +326,13 @@
 									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nchar]" />
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
 							</Entry>
 						</Relationship>
+						<AttachedAnnotation Disambiguator="5" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -107,7 +343,7 @@
 									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nchar]" />
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -123,7 +359,7 @@
 									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nchar]" />
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -139,7 +375,115 @@
 									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nchar]" />
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[ValuePapers]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="4" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[buyingPrice]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Precision" Value="53" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[spentBuying]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Precision" Value="53" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[currentPrice]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Precision" Value="53" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[boughtShares]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Precision" Value="53" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ValuePapers].[name]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
 										</Entry>
 									</Relationship>
 								</Element>

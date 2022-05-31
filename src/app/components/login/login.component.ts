@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   logInClick() {
     const user: User = {
-      Id: 0,
+      id: 0,
       username: this.username,
       firstName: "",
       lastName: "",
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   RegisterClick(){
     const user: User = {
-      Id: 0,
+      id: 0,
       username: this.username,
       firstName: this.fName,
       lastName: this.lName,

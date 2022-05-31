@@ -13,9 +13,12 @@ export class UserService {
 
   loggedIn: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
+  userId: number = 0;
+
   registerUser(user: User){ 
-    this.http.post("https://localhost:44303/api/users/createuser", user).toPromise().then((val: Response) => {
+    this.http.post("https://localhost:44303/api/users/createuser", user).toPromise().then((val: User) => {
       this.loggedIn.next(true);
+      this.userId = val.id;
     },
     (error) => { //Error callback
       console.error('Login error ' + error.status);
@@ -24,11 +27,12 @@ export class UserService {
    }
 
    login(user: User){ 
-    this.http.post("https://localhost:44303/api/users/verifyuser", user, {observe: 'response'} ).subscribe((val: any)=>{
-      console.log(val.body);
-      console.log(val.status);
-      console.log(val.statusText);
+    this.http.post("https://localhost:44303/api/users/verifyuser", user).toPromise().then((val: User)=>{
+      console.log(val);
+      //console.log(val.status);
+      //console.log(val.statusText);
       this.loggedIn.next(true);
+      this.userId = val.id;
     },
     (error) => { //Error callback
       console.error('Login error ' + error.status);
@@ -38,9 +42,12 @@ export class UserService {
 
   logout(){
     this.loggedIn.next(false);
+    this.userId = 0;
   }
     
-    
+  getLoggedUserId(): number {
+    return this.userId;
+  }  
     //.subscribe((val: {
       
   //       "message": String,

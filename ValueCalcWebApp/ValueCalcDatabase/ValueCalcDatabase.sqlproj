@@ -61,6 +61,7 @@
     <Build Include="Users.sql" />
     <Build Include="ValuePapers.sql" />
     <Build Include="BoughtPapers.sql" />
+    <Build Include="GetPapersForUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ValueCalcDatabase.refactorlog" />

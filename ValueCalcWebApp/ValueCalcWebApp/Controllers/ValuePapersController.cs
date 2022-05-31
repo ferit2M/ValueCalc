@@ -40,7 +40,7 @@ namespace ValueCalcWebApp.Controllers
       }
     }
 
-    [HttpGet("GetPapersForUser")]
+    [HttpPost("GetPapersForUser")]
     public IActionResult GetPapersForUser([FromBody] UserRequest request)
     {
       try
@@ -124,20 +124,31 @@ namespace ValueCalcWebApp.Controllers
       return Ok();
     }
 
-    [HttpDelete("DeletePaper/{Id}")]
-    public IActionResult DeletePaper(int Id)
+    [HttpPost("DeletePaper")]
+    public IActionResult DeletePaper([FromBody] ValuePaperRequest request)
     {
       try
       {
-        BoughtPapers boughtPaper = _dbContext.BoughtPapers.Where(x => x.paperId == Id).Single<BoughtPapers>();
-        _dbContext.BoughtPapers.Remove(boughtPaper);
+        int Id = request.Id;
+
+        IQueryable<BoughtPapers> boughtPapersQueary = _dbContext.BoughtPapers.Where(x => x.paperId == Id);
+
+
+        BoughtPapers boughtPaper = null;
+        if (boughtPapersQueary.Any())
+          boughtPaper = boughtPapersQueary.Single<BoughtPapers>();
+
+        //BoughtPapers boughtPaper = _dbContext.BoughtPapers.Where(x => x.paperId == Id)?.Single<BoughtPapers>();
+
+        if (boughtPaper != null)
+          _dbContext.BoughtPapers.Remove(boughtPaper);
         //_dbContext.SaveChanges();
 
         ValuePapers paper = _dbContext.ValuePapers.Where(x => x.Id == Id).Single<ValuePapers>();
         _dbContext.ValuePapers.Remove(paper);
         _dbContext.SaveChanges();
 
-        return Ok("Record has successfully Deleted");
+        return Ok();
       }
       catch(Exception)
       {
