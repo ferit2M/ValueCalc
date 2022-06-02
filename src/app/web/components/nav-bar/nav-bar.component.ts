@@ -22,10 +22,14 @@ export class NavBarComponent implements OnInit {
     this.service.loggedIn.subscribe(state => {
       this.loginVisible = state;
   });
+  this.service.username.subscribe(state => {
+    this.username = state;
+});
 }
   
   isMobile: Boolean;
   loginVisible: Boolean = false;
+  username: String;
 
   goToHomePage() {
     this.router.navigate(["home"], {replaceUrl: false});

@@ -25,5 +25,8 @@
     <ion-col class="login" [hidden]="!loginVisible">
       <ion-button (click)="logout()">log out</ion-button>
     </ion-col>
+    <ion-col class="username" [hidden]="!loginVisible">
+      Current user: {{this.username}}
+    </ion-col>
   </ion-row>
 </ion-grid> 

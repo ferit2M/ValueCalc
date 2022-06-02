@@ -44,14 +44,15 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    this.service.login(user);
-      //checkLogin();
-    if(this.userLoggedIn == false){
-      this.registerMessage = false;
-      this.logMessage = true; 
-    }
-
-    //console.log(this.userLoggedIn)
+    this.service.login(user).then(
+      (val) => { 
+        console.log(val)
+      },
+      (err) => {
+        this.registerMessage = false;
+        this.logMessage = true; 
+      }
+    );
   }
 
   RegisterClick(){
@@ -63,11 +64,15 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    this.service.registerUser(user);
-    if(this.userLoggedIn == false){
-      this.logMessage = false;
-      this.registerMessage = true; 
-    }
+    this.service.registerUser(user).then(
+      (val) => { 
+        console.log(val)
+      },
+      (err) => {
+        this.registerMessage = true;
+        this.logMessage = false; 
+      }
+    );
   }
 
   showHideRegister() {
