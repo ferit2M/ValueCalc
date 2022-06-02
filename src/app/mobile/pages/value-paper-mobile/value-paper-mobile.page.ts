@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-value-paper-mobile',
@@ -8,7 +9,9 @@ import { FromCurrency } from 'src/app/interfaces/from-currency';
 })
 export class ValuePaperMobilePage implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
+
+  loggedIn: Boolean;
 
   fromUSD: FromCurrency[] = [];
   fromEUR: FromCurrency[] = []; 
@@ -22,6 +25,9 @@ export class ValuePaperMobilePage implements OnInit {
   convertingCurrencyIndex = 0;
 
   ngOnInit() {
+    this.userService.loggedIn.subscribe(val => {
+      this.loggedIn = val;
+    });
   }
 
   conversionVal: number = 1;

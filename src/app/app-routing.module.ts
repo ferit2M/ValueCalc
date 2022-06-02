@@ -35,6 +35,10 @@ const routes: Routes = [
         loadChildren: () => import('./mobile/pages/login/login.module').then( m => m.LoginPageModule)
       },
       {
+        path: 'home',
+        loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then( m => m.HomeMobilePageModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then(m => m.HomeMobilePageModule)
       }
@@ -43,6 +47,9 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },  {
+    path: 'saved-papers-tab',
+    loadChildren: () => import('./mobile/pages/saved-papers-tab/saved-papers-tab.module').then( m => m.SavedPapersTabPageModule)
   },/*
   {
     path: 'calculator-tab',

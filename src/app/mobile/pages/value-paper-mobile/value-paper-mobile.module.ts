@@ -17,6 +17,6 @@ import { ValuePaperMobilePage } from './value-paper-mobile.page';
     IonicModule,
     ValuePaperMobilePageRoutingModule
   ],
-  declarations: [ValuePaperMobilePage, NavBarComponent, CurrenciesComponent]
+  declarations: [ValuePaperMobilePage, NavBarComponent, ]
 })
 export class ValuePaperMobilePageModule {}

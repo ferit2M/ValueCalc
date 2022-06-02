@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
+import { PlatformSetService } from 'src/app/services/platform-set.service';
 
 @Component({
   selector: 'app-login1',
@@ -14,14 +15,20 @@ export class LoginComponent implements OnInit {
   logMessage: Boolean = false;
   registerMessage: Boolean = false;
 
-  constructor(private service: UserService, private router: Router) { }
+  constructor(private service: UserService, private router: Router, private platformService: PlatformSetService) { }
 
   ngOnInit() {
     this.service.loggedIn.subscribe(state => {
       this.userLoggedIn = state;
       console.log(this.userLoggedIn);
       if(this.userLoggedIn==true)
-        this.router.navigate([".\home"]);
+      {
+        console.log("isMobile login component: ", this.platformService.isMobile)
+        if (this.platformService.isMobile)
+          this.router.navigate(["mobile/home"], {replaceUrl: true});
+        else
+          this.router.navigate(["home"], {replaceUrl: true});
+      }
     }); 
   }
 

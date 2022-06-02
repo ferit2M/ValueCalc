@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FromCurrency } from 'src/app/interfaces/from-currency';
+import { ValuePaper } from 'src/app/interfaces/value-paper';
+import { UserService } from 'src/app/services/user/user.service';
+import { ValuePaperService } from 'src/app/services/valuePaper/value-paper.service';
 import { TabCommunicationService } from '../../services/tab-communication.service';
 
 @Component({
@@ -9,12 +12,13 @@ import { TabCommunicationService } from '../../services/tab-communication.servic
 })
 export class CalculatorTabPage implements OnInit {
 
-  constructor(private tabComm: TabCommunicationService) { }
+  constructor(private tabComm: TabCommunicationService, private valuePaperService: ValuePaperService,
+    private userService: UserService
+    ) { }
 
-  /* fromUSD: FromCurrency[] = [];
-  fromEUR: FromCurrency[] = []; 
-  fromHRK: FromCurrency[] = [];  */
-
+  paperName: string;
+  loggedIn: Boolean;
+  
   
   exchangeRates: FromCurrency[] = [];
   
@@ -27,7 +31,10 @@ export class CalculatorTabPage implements OnInit {
       console.log(val);
       if (val != null)
         this.currencyChanged(val);
-    })
+    });
+    this.userService.loggedIn.subscribe(val=>{
+      this.loggedIn = val;
+    });
   }
 
   conversionVal: number = 1;
@@ -101,5 +108,18 @@ export class CalculatorTabPage implements OnInit {
   convertingCurrencyChanged(index: number) {
     this.convertingCurrencyIndex = index;
     this.setExchangeRateForConvertingCurrencySelected();
+  }
+
+  saveNote() {
+    const paper: ValuePaper = {
+      id: 0,
+      buyingPrice: this.buyingPrice,
+      spentBuying: this.spentBuying,
+      currentPrice: this.currentPrice,
+      boughtShares: this.boughtShares,
+      name: this.paperName
+    }
+
+    this.valuePaperService.saveValuePaper(paper, this.userService.getLoggedUserId());
   }
 }

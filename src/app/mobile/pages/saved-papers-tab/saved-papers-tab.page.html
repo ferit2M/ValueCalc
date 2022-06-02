@@ -1,0 +1,30 @@
+
+<ion-content>
+  <ion-row>
+    <ion-grid>
+      <ion-row size="auto">
+        <ion-col>
+          <ion-item>
+            <ion-label>Naziv</ion-label>
+            <ion-label>Cijena jednog papira</ion-label>
+            <ion-label>Kupljeno za iznos</ion-label>
+            <ion-label>Količina</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let p of papers; let i=index">
+        <ion-col>
+          <ion-item>
+            <ion-label>{{p.name}}</ion-label>
+            <ion-label>{{p.buyingPrice}}</ion-label>
+            <ion-label>{{p.spentBuying}}</ion-label>
+            <ion-label>{{p.boughtShares}}</ion-label>
+            <ion-button color="danger" (click)="deletePaperNote(i)">X</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-row>
+</ion-content>

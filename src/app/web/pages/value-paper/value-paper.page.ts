@@ -17,6 +17,7 @@ export class ValuePaperPage implements OnInit {
 
   loggedIn: Boolean;
   papers: ValuePaper[];
+  paperName: string;
 
   fromUSD: FromCurrency[] = [];
   fromEUR: FromCurrency[] = []; 
@@ -143,7 +144,7 @@ export class ValuePaperPage implements OnInit {
       spentBuying: this.spentBuying,
       currentPrice: this.currentPrice,
       boughtShares: this.boughtShares,
-      name: "ime"
+      name: this.paperName
     }
 
     this.valuePaperService.saveValuePaper(paper, this.userService.getLoggedUserId());

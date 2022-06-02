@@ -109,6 +109,13 @@
           <ion-label class="currencyLabel">{{convertingCurrency}}</ion-label>
         </ion-item>
       </ion-row>
+      
+      <ion-row [hidden]="!loggedIn">
+        <ion-button (click)="saveNote()">Make note</ion-button>
+        <ion-item>
+          <ion-input [(ngModel)]="paperName" placeholder="Paper name"></ion-input>
+        </ion-item>
+      </ion-row>
     </ion-col>
   </ion-grid>
 </ion-content>
