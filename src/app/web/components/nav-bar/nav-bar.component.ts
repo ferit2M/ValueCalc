@@ -19,38 +19,78 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.loggedIn.subscribe(state => {
+      this.service.loggedIn.subscribe(state => {
       this.loginVisible = state;
-  });
-  this.service.username.subscribe(state => {
-    this.username = state;
-});
+    });
+      this.service.username.subscribe(state => {
+      this.username = state;
+    });
+
+
+    if(this.router.url == "/web/currency-calc"){
+      this.toggleCur = true;
+      this.toggleHome = false;
+      this.toggleLog = false;
+      this.toggleVal = false;
+    }
+    else if(this.router.url == "/web/value-paper"){
+      this.toggleCur = false;
+      this.toggleHome = false;
+      this.toggleLog = false;
+      this.toggleVal = true;
+    }
+    else if(this.router.url == "/web/login"){
+      this.toggleCur = false;
+      this.toggleHome = false;
+      this.toggleLog = true;
+      this.toggleVal = false;
+    }
+    else{
+      this.toggleCur = false;
+      this.toggleHome = true;
+      this.toggleLog = false;
+      this.toggleVal = false;
+    }
+
 }
+
   
   isMobile: Boolean;
   loginVisible: Boolean = false;
   username: String;
+  toggleCur: Boolean = false;
+  toggleHome: Boolean = true;
+  toggleVal: Boolean = false;
+  toggleLog: Boolean = false;
 
-  goToHomePage() {
+
+  goToHomePage(event) {
+    event.preventDefault();
     this.router.navigate(["home"], {replaceUrl: false});
   }
 
-  goToCurrencyPage() {
-    
-    if (this.isMobile) 
+  goToCurrencyPage(event) {
+    event.preventDefault();
+
+    if (this.isMobile){ 
       this.router.navigate(["mobile/currency-calc-mobile"], {replaceUrl: false});
-    else
+    }
+    else{
       this.router.navigate(["web/currency-calc"], {replaceUrl: false});
+    }
+  
   }
 
-  goToValueCalcPage() {
+  goToValueCalcPage(event) {
+    event.preventDefault();
     if (this.isMobile) 
       this.router.navigate(["mobile/value-paper-mobile"], {replaceUrl: false});
     else
       this.router.navigate(["web/value-paper"], {replaceUrl: false});   
   }
 
-  goToLoginPage() {
+  goToLoginPage(event) {
+    event.preventDefault();
     if (this.isMobile) 
       this.router.navigate(["mobile/login"], {replaceUrl: true});
     else
@@ -61,4 +101,6 @@ export class NavBarComponent implements OnInit {
     this.service.logout();
     this.router.navigate(["web/login"]);
   }
+
+  
 }

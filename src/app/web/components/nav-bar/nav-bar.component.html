@@ -1,4 +1,4 @@
-<ion-grid>
+<!-- <ion-grid>
   <ion-row>
     <ion-col>
       <ion-button (click)="goToHomePage()">
@@ -29,4 +29,25 @@
       Current user: {{this.username}}
     </ion-col>
   </ion-row>
-</ion-grid> 
+</ion-grid>  -->
+
+ <ul>
+  <li><a href="#" [ngClass]="{'active': toggleHome}" (click)="goToHomePage($event)"   >
+    HOME
+  </a></li>
+  <li><a href="#" [ngClass]="{'active': toggleCur}" (click)="goToCurrencyPage($event)"  >
+    CURRENCY CALCULATOR
+  </a></li>
+  <li><a href="#" (click)="goToValueCalcPage($event)" [ngClass]="{'active': toggleVal}" >
+    VALUE CALCULATOR
+  </a></li>
+  <li><a href="#" (click)="goToLoginPage($event)" [ngClass]="{'active': toggleLog}" [hidden]="loginVisible">
+    LOGIN
+  </a></li>
+  <li><a href="#" (click)="logout()" [hidden]="!loginVisible" >
+    LOGOUT
+  </a></li>
+  <li><p class="username" [hidden]="!loginVisible">
+    CURRENT USER: {{this.username}}
+  </p></li>
+</ul>
