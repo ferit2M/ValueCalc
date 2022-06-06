@@ -8,14 +8,16 @@ import { CurrenciesTabPageRoutingModule } from './currencies-tab-routing.module'
 
 import { CurrenciesTabPage } from './currencies-tab.page';
 import { CurrenciesComponent } from 'src/app/web/components/currencies/currencies.component';
+import { ComponentsMobileModule } from 'src/app/components/components-mobile/components-mobile.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CurrenciesTabPageRoutingModule
+    CurrenciesTabPageRoutingModule,
+    ComponentsMobileModule
   ],
-  declarations: [CurrenciesTabPage, CurrenciesComponent]
+  declarations: [CurrenciesTabPage]//CurrenciesComponent
 })
 export class CurrenciesTabPageModule {}

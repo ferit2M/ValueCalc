@@ -9,14 +9,16 @@ import { CurrencyCalcMobilePageRoutingModule } from './currency-calc-mobile-rout
 import { CurrencyCalcMobilePage } from './currency-calc-mobile.page';
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
 import { CurrenciesComponent } from 'src/app/web/components/currencies/currencies.component';
+import { ComponentsMobileModule } from 'src/app/components/components-mobile/components-mobile.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CurrencyCalcMobilePageRoutingModule
+    CurrencyCalcMobilePageRoutingModule,
+    ComponentsMobileModule
   ],
-  declarations: [CurrencyCalcMobilePage, NavBarComponent, CurrenciesComponent]
+  declarations: [CurrencyCalcMobilePage, NavBarComponent] //CurrenciesComponent
 })
 export class CurrencyCalcMobilePageModule {}
