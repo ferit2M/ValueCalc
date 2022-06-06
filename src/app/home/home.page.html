@@ -4,7 +4,68 @@
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
+  <!-- <div id="container">
     <div id="helloMessage" [hidden]="!userLogin">Welcome! {{userName}}</div>
+  </div> -->
+
+  <h1 class="centerText">
+    Value Calculator
+  </h1>
+  <hr class="hrLine width30">
+  <br><br>
+
+  <h2 class="subtitleMargin centerText">Instructions:</h2>
+
+  <div>
+    <img src="../../assets/exchange-rates.png" alt="" class="image">
+    <p class="paragrafMargin">
+      This is component which contains exchange rates for currencies. This is extracted into it's own separate component so it could be 
+      easily reused in multiple pages. This component is used in both calculators: Currency Calculator and Value Paper Calculator.
+    </p>
+    <p class="paragrafMargin">
+      This is calculator for converting currencies. API used for exchange rates: <a href="https://www.exchangerate-api.com/">https://www.exchangerate-api.com/</a>.
+    </p>
+    <br><br>
+    <img src="../../assets/currency-calc.png" alt="" class="image">
   </div>
+
+  <br class="clearFloat">
+  <br>
+  <hr class="hrLine width95">
+
+  <div class="clearFloat">
+    <img src="../../assets/exchange-rates.png" alt="" class="image">
+    <p class="paragrafMargin">
+      This is component which contains exchange rates for currencies. This is extracted into it's own separate component so it could be 
+      easily reused in multiple pages. This component is used in both calculators: Currency Calculator and Value Paper Calculator.
+    </p>
+    <p class="paragrafMargin">
+      This calculator can calculate earning or loss of a value papers such as stocks or cryptocurrencies.
+    </p>
+    <br><br>
+    <img src="../../assets/value-calc.png" alt="" class="image">
+  </div>
+
+  <br class="clearFloat">
+  <br>
+  <hr class="hrLine width95">
+
+  <div class="clearFloat">
+    <img src="../../assets/login.png" alt="" class="image">
+    <p class="paragrafMargin">
+      Logged users are able to save their calculations, make notes of their value papers.
+    </p>
+    <br><br>
+    <img src="../../assets/saved-papers.png" alt="" class="image">
+  </div>
+
+  <br class="clearFloat">
+  <br>
+  <hr class="hrLine width95">
 </ion-content>
+
+<ion-footer>
+  <p class="centerText">
+    Developed by Mihael Marjanović & Tomislav Markovica
+  </p>
+</ion-footer>

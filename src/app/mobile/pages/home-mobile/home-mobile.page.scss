@@ -1,0 +1,42 @@
+// content
+.centerText {
+    text-align: center;
+  }
+
+.hrLine {
+    background: purple;
+  }
+  
+  .width30 {
+    width: 50%;
+  }
+  
+  .width95 {
+    width: 100%;
+  }
+  
+  .subtitleMargin {
+    margin-bottom: 5px;
+  }
+  
+  .image {
+    margin-top: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    border: 2px solid beige;
+    box-shadow: 5px 10px #888888;
+  }
+  
+  .paragrafMargin {
+    margin-top: 10px;
+  }
+  
+  .clearFloat {
+    clear: both;
+  }
+  
+  ion-footer {
+    background: #618685;
+  }
