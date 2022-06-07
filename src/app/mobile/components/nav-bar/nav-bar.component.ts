@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,11 +9,19 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  
+  constructor(private router: Router, private service: UserService) { }
 
-  constructor(private router: Router) { }
+  loginVisible: Boolean = false;
+  username: String;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.loggedIn.subscribe(state => {
+      this.loginVisible = state;
+    });
+      this.service.username.subscribe(state => {
+      this.username = state;
+    });
+  }
 
   goToHomePage() {
     this.router.navigate(["mobile/home-mobile"], {replaceUrl: true});
@@ -27,6 +36,11 @@ export class NavBarComponent implements OnInit {
   }
 
   goToLoginPage() {
+    this.router.navigate(["mobile/login"], {replaceUrl: true});
+  }
+
+  logout(){
+    this.service.logout();
     this.router.navigate(["mobile/login"], {replaceUrl: true});
   }
 }
