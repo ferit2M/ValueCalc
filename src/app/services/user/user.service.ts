@@ -20,6 +20,7 @@ export class UserService {
     this.http.post("https://localhost:44303/api/users/createuser", user).toPromise().then((val: User) => {
       this.loggedIn.next(true);
       this.userId = val.id;
+      this.username.next(user.username)
       resolve("Registration done")
     },
     (error) => { //Error callback

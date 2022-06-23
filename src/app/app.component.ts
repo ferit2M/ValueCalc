@@ -20,11 +20,12 @@ export class AppComponent {
   isMobile: Boolean;
 
   initializeApp() {
-    this.isMobile = this.platform.is('mobileweb') || this.platform.is('mobile');
-    this.platformSet.isMobile = this.isMobile;
-    console.log("platform: ", (this.isMobile ? "mobile" : "mobileweb"));
+    //this.isMobile = this.platform.is('mobileweb') || this.platform.is('mobile');
+    //this.platformSet.isMobile = this.isMobile;
+    //console.log("platform: ", (this.isMobile ? "mobile" : "mobileweb"));
+    this.platformSet.isMobile = this.platform.is('mobile');
 
-    if (this.isMobile)
+    if (this.platformSet.isMobile)
       this.router.navigate(["mobile/home-mobile"], {replaceUrl: true});
     else
       this.router.navigate([""], {replaceUrl: true});

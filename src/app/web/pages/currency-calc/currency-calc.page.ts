@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class CurrencyCalcPage implements OnInit {
 
   constructor(
-    private exchangeRatesService: ExchangeRatesService,
+   // private exchangeRatesService: ExchangeRatesService,
     private userService: UserService
   ) { }
 

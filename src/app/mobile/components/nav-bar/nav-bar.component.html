@@ -23,6 +23,7 @@
       <ion-item (click)="goToValueCalcPage()">Value paper calculator</ion-item>
       <ion-item (click)="goToLoginPage()" [hidden]="loginVisible" id="login">Login</ion-item>
       <ion-item (click)="logout()" [hidden]="!loginVisible" id="login">Logout</ion-item>
+      <ion-item [hidden]="!loginVisible">CURRENT USER: {{this.username}}</ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

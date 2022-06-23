@@ -34,10 +34,10 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('./mobile/pages/login/login.module').then( m => m.LoginPageModule)
       },
-      {
-        path: 'home',
-        loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then( m => m.HomeMobilePageModule)
-      },
+      // {
+      //   path: 'home',
+      //   loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then( m => m.HomeMobilePageModule)
+      // },
       {
         path: '**',
         loadChildren: () => import('./mobile/pages/home-mobile/home-mobile.module').then(m => m.HomeMobilePageModule)

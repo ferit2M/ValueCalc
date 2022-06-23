@@ -36,11 +36,8 @@ export class LoginComponent implements OnInit {
   password: string = "";
   fName: string = "";
   lName: string = "";
-  // div1:boolean = false;
-  // div2:boolean = true;
   registerDivVisible = false;
-  //logIn200 = false;
-  //value: any;
+
 
   logInClick() {
     const user: User = {

@@ -54,7 +54,6 @@ export class NavBarComponent implements OnInit {
 
 }
 
-  
   isMobile: Boolean;
   loginVisible: Boolean = false;
   username: String;
@@ -102,5 +101,4 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(["web/login"]);
   }
 
-  
 }
