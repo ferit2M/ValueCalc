@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   userLoggedIn: Boolean = false;
   logMessage: Boolean = false;
-  registerMessage: Boolean = false;
+  registerMessage1: Boolean = false;
+  registerMessage2: Boolean = false;
 
   constructor(private service: UserService, private router: Router, private platformService: PlatformSetService) { }
 
@@ -53,30 +54,38 @@ export class LoginComponent implements OnInit {
         console.log(val)
       },
       (err) => {
-        this.registerMessage = false;
+        this.registerMessage1 = false;
+        this.registerMessage2 = false;
         this.logMessage = true; 
       }
     );
   }
 
   RegisterClick(){
-    const user: User = {
-      id: 0,
-      username: this.username,
-      firstName: this.fName,
-      lastName: this.lName,
-      password: this.password
+    if(this.username== "" || this.fName == "" || this.lName == "" || this.password == ""){
+      this.registerMessage2 = true;
+      this.registerMessage1 = false;
+      this.logMessage = false;  
     }
-
-    this.service.registerUser(user).then(
-      (val) => { 
-        console.log(val)
-      },
-      (err) => {
-        this.registerMessage = true;
-        this.logMessage = false; 
+    else{
+      const user: User = {
+        id: 0,
+        username: this.username,
+        firstName: this.fName,
+        lastName: this.lName,
+        password: this.password
       }
-    );
+      this.service.registerUser(user).then(
+        (val) => { 
+          console.log(val)
+        },
+        (err) => {
+          this.registerMessage1 = true;
+          this.registerMessage2 = false;
+          this.logMessage = false; 
+        }
+      );
+    }
   }
 
   showHideRegister() {
