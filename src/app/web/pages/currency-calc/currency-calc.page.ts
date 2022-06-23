@@ -11,7 +11,6 @@ import { UserService } from 'src/app/services/user/user.service';
 export class CurrencyCalcPage implements OnInit {
 
   constructor(
-   // private exchangeRatesService: ExchangeRatesService,
     private userService: UserService
   ) { }
 
@@ -28,10 +27,6 @@ export class CurrencyCalcPage implements OnInit {
  outputValue: string;
  inputCurrency: string;
  outputCurrency: string;
-
-//  fromUSD: FromCurrency[] = [];
-//  fromEUR: FromCurrency[] = []; 
-//  fromHRK: FromCurrency[] = []; 
 
   exchangeRates: FromCurrency[] = [];
   

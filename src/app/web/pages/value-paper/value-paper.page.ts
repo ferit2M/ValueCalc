@@ -134,7 +134,6 @@ export class ValuePaperPage implements OnInit {
 
     this.valuePaperService.deletePaper(this.papers[index], index);
 
-    //this.getLoggedUserPapers();
   }
 
   saveNote() {

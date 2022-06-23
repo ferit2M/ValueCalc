@@ -45,18 +45,6 @@ export class UserService {
       reject("Login error" + error.status);
     });
     });  
-
-    /* this.http.post("https://localhost:44303/api/users/verifyuser", user).toPromise().then((val: User)=>{
-      console.log(val);
-      //console.log(val.status);
-      //console.log(val.statusText);
-      this.loggedIn.next(true);
-      this.userId = val.id;
-    },
-    (error) => { //Error callback
-      console.error('Login error ' + error.status);
-      this.loggedIn.next(false);
-    }); */ 
   }
 
   logout(){
@@ -67,17 +55,4 @@ export class UserService {
   getLoggedUserId(): number {
     return this.userId;
   }  
-    //.subscribe((val: {
-      
-  //       "message": String,
-    
-  //     }) => {
-  //     if(val.message=="verified"){
-  //       console.log("User logged in");
-  //     }
-  //     else if(val.message == "Wrong password"){
-  //       console.log("Wrong password");
-  //     }
-  //   }).catch()
-  //  }
 }
